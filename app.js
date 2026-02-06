@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const speedToggle = document.getElementById('speed-toggle');
   const speedButtons = document.querySelectorAll('.speed-btn');
 
-  let currentColor = '#FFFFFF';
+  let currentColor = '#2A2A2A';
   let recentColors = [];
   let activeSceneId = null;
   let sceneFrameId = null;
@@ -79,11 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Set white as default on load
-  const defaultSwatch = document.querySelector('.swatch[data-color="#FFFFFF"]');
-  if (defaultSwatch) {
-    defaultSwatch.classList.add('active');
-  }
+  // No preset swatch selected on load (default is dark gray)
 
   // --- Hex Input ---
 
@@ -500,6 +496,33 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       requestWakeLock();
+    }
+  });
+
+  // --- Info Overlay ---
+
+  const infoBtn = document.getElementById('info-btn');
+  const infoOverlay = document.getElementById('info-overlay');
+  const infoCloseBtn = document.getElementById('info-close-btn');
+
+  infoBtn.addEventListener('click', () => {
+    infoOverlay.classList.add('visible');
+  });
+
+  infoCloseBtn.addEventListener('click', () => {
+    infoOverlay.classList.remove('visible');
+  });
+
+  infoOverlay.addEventListener('click', (e) => {
+    if (e.target === infoOverlay) {
+      infoOverlay.classList.remove('visible');
+    }
+    e.stopPropagation();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && infoOverlay.classList.contains('visible')) {
+      infoOverlay.classList.remove('visible');
     }
   });
 

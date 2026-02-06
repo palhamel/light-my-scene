@@ -21,6 +21,9 @@
   <!-- Control panel -->
   <div class="control-panel">
 
+    <!-- Info button -->
+    <button class="info-btn" id="info-btn" aria-label="About this app">i</button>
+
     <!-- Color swatches -->
     <section class="swatches">
       <button class="swatch" data-color="#FFFFFF" style="background-color: #FFFFFF;" aria-label="White"></button>
@@ -59,7 +62,7 @@
         </button>
       </div>
       <button class="picker-btn" id="picker-btn" aria-label="Open color picker">
-        <input type="color" id="color-picker" class="color-picker-native" value="#FFFFFF">
+        <input type="color" id="color-picker" class="color-picker-native" value="#2A2A2A">
       </button>
     </section>
 
@@ -108,6 +111,26 @@
       Hide Controls
     </button>
 
+  </div>
+
+  <!-- Info overlay -->
+  <div class="info-overlay" id="info-overlay">
+    <div class="info-card">
+      <h2>Light My Scene</h2>
+      <p>Turn any screen into a photography light source. Pick a solid color, dial in a custom hex, or run animated lighting effects -- all from your browser.</p>
+      <ul>
+        <li>Tap a color swatch for instant background change</li>
+        <li>Enter a hex code or use the color picker for any hue</li>
+        <li>Try Police, Fire, or Storm for animated lighting FX</li>
+        <li>Adjust intensity and speed to match your shot</li>
+        <li>Hit "Hide Controls" to go fullscreen -- tap anywhere to bring them back</li>
+      </ul>
+      <p>Built for photographers and content creators who need quick, free colored lighting on an iPad or any screen.</p>
+      <div class="info-footer">
+        <a href="https://github.com/palhamel/light-my-scene" target="_blank" rel="noopener">View on GitHub</a> -- if you find it useful, a star is appreciated
+      </div>
+      <button class="info-close-btn" id="info-close-btn">Close</button>
+    </div>
   </div>
 
   <!-- Branding -->
