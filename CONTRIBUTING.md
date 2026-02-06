@@ -4,7 +4,7 @@ Thanks for your interest in contributing. This is a simple, zero-dependency proj
 
 ## Ground Rules
 
-- **No frameworks, no build tools, no npm.** This project is vanilla HTML, CSS, and JavaScript. That's intentional. See the [tech stack docs](.agent-os/product/tech-stack.md) for rationale.
+- **No frameworks, no build tools, no npm.** This project is vanilla HTML, CSS, and JavaScript. That's intentional.
 - **Keep it light.** Total page size should stay under 50KB (HTML + CSS + JS combined).
 - **No external dependencies.** No CDN links, no third-party libraries. Inline SVGs for icons, system fonts only.
 
@@ -19,7 +19,7 @@ Thanks for your interest in contributing. This is a simple, zero-dependency proj
 
 ## What We're Looking For
 
-- New motion FX scenes (see Phase 5-6 in the roadmap)
+- New motion FX scenes
 - Performance improvements (especially for iPad)
 - Accessibility improvements
 - Bug fixes

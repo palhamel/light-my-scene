@@ -509,9 +509,9 @@ body {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border: 1.5px solid white;
   background: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: white;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 13px;
   font-style: italic;
@@ -520,14 +520,17 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  mix-blend-mode: difference;
+  transition: all 0.2s ease;
   outline: none;
   padding: 0;
 }
 
 .info-btn:hover {
-  color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(255, 255, 255, 0.6);
+  mix-blend-mode: normal;
+  background: #1a1a1a;
+  color: #f5c518;
+  border-color: #f5c518;
 }
 
 /* --- Info Panel --- */
