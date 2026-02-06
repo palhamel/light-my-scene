@@ -460,3 +460,23 @@ body {
 .fullscreen-icon {
   flex-shrink: 0;
 }
+
+/* --- Branding --- */
+
+.branding {
+  position: fixed;
+  bottom: 12px;
+  right: 16px;
+  z-index: 2;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  text-decoration: none;
+  user-select: none;
+  pointer-events: auto;
+  transition: color 0.2s ease;
+}
+
+.branding:active {
+  color: rgba(255, 255, 255, 0.5);
+}
