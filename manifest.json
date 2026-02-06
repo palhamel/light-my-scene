@@ -1,7 +1,7 @@
 {
-  "name": "Light App",
-  "short_name": "Light",
-  "start_url": "/",
+  "name": "Light My Scene",
+  "short_name": "Light My Scene",
+  "start_url": "/light-my-scene/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
