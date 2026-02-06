@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
+  const appContainer = document.getElementById('app-container');
   const controlPanel = document.querySelector('.control-panel');
   const swatches = document.querySelectorAll('.swatch');
   const intensitySlider = document.getElementById('intensity-slider');
@@ -411,14 +412,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let panelHidden = false;
 
   const hideControls = () => {
-    controlPanel.classList.add('hidden');
+    appContainer.classList.add('hidden');
     panelHidden = true;
     // Attempt fullscreen on supported browsers (silent fail on iPad)
     enterFullscreen();
   };
 
   const showControls = () => {
-    controlPanel.classList.remove('hidden');
+    appContainer.classList.remove('hidden');
     panelHidden = false;
   };
 
@@ -438,8 +439,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Tap-to-Show Controls ---
 
-  // Prevent clicks inside control panel from toggling it
-  controlPanel.addEventListener('click', (e) => {
+  // Prevent clicks inside app container from toggling it
+  appContainer.addEventListener('click', (e) => {
     e.stopPropagation();
   });
 
@@ -499,32 +500,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Info Overlay ---
+  // --- Info Panel ---
 
   const infoBtn = document.getElementById('info-btn');
-  const infoOverlay = document.getElementById('info-overlay');
+  const infoPanel = document.getElementById('info-panel');
   const infoCloseBtn = document.getElementById('info-close-btn');
 
-  infoBtn.addEventListener('click', () => {
-    infoOverlay.classList.add('visible');
-  });
+  const closeInfo = () => {
+    infoPanel.classList.add('hidden');
+    controlPanel.classList.remove('hidden');
+    localStorage.setItem('lms-info-seen', '1');
+  };
 
-  infoCloseBtn.addEventListener('click', () => {
-    infoOverlay.classList.remove('visible');
-  });
+  const openInfo = () => {
+    infoPanel.classList.remove('hidden');
+    controlPanel.classList.add('hidden');
+  };
 
-  infoOverlay.addEventListener('click', (e) => {
-    if (e.target === infoOverlay) {
-      infoOverlay.classList.remove('visible');
-    }
-    e.stopPropagation();
-  });
+  infoBtn.addEventListener('click', openInfo);
+  infoCloseBtn.addEventListener('click', closeInfo);
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && infoOverlay.classList.contains('visible')) {
-      infoOverlay.classList.remove('visible');
-    }
-  });
+  // First visit: show info, hide controls. Returning: show controls, hide info.
+  if (localStorage.getItem('lms-info-seen')) {
+    infoPanel.classList.add('hidden');
+  } else {
+    controlPanel.classList.add('hidden');
+  }
 
   // --- Service Worker Registration ---
 

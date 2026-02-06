@@ -8,6 +8,7 @@
   <title>Light My Scene</title>
   <meta name="apple-mobile-web-app-title" content="Light My Scene">
   <meta name="theme-color" content="#000000">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-192.png">
@@ -18,104 +19,103 @@
   <!-- Intensity overlay: dims the color output -->
   <div class="intensity-overlay"></div>
 
-  <!-- Control panel -->
-  <div class="control-panel">
+  <!-- App container: holds controls + info stacked -->
+  <div class="app-container" id="app-container">
 
-    <!-- Info button -->
-    <button class="info-btn" id="info-btn" aria-label="About this app">i</button>
+    <!-- Control panel -->
+    <div class="control-panel">
 
-    <!-- Color swatches -->
-    <section class="swatches">
-      <button class="swatch" data-color="#FFFFFF" style="background-color: #FFFFFF;" aria-label="White"></button>
-      <button class="swatch" data-color="#4488FF" style="background-color: #4488FF;" aria-label="Blue"></button>
-      <button class="swatch" data-color="#44DD66" style="background-color: #44DD66;" aria-label="Green"></button>
-      <button class="swatch" data-color="#FF4444" style="background-color: #FF4444;" aria-label="Red"></button>
-      <button class="swatch" data-color="#FFDD44" style="background-color: #FFDD44;" aria-label="Yellow"></button>
-      <button class="swatch" data-color="#FF66AA" style="background-color: #FF66AA;" aria-label="Pink"></button>
-    </section>
+      <!-- Color swatches -->
+      <section class="swatches">
+        <button class="swatch" data-color="#FFFFFF" style="background-color: #FFFFFF;" aria-label="White"></button>
+        <button class="swatch" data-color="#4488FF" style="background-color: #4488FF;" aria-label="Blue"></button>
+        <button class="swatch" data-color="#44DD66" style="background-color: #44DD66;" aria-label="Green"></button>
+        <button class="swatch" data-color="#FF4444" style="background-color: #FF4444;" aria-label="Red"></button>
+        <button class="swatch" data-color="#FFDD44" style="background-color: #FFDD44;" aria-label="Yellow"></button>
+        <button class="swatch" data-color="#FF66AA" style="background-color: #FF66AA;" aria-label="Pink"></button>
+      </section>
 
-    <!-- Recent colors (hidden until first custom color) -->
-    <section class="recent-colors hidden" id="recent-colors">
-      <span class="recent-label">Recent</span>
-      <div class="recent-swatches" id="recent-swatches"></div>
-    </section>
+      <!-- Recent colors (hidden until first custom color) -->
+      <section class="recent-colors hidden" id="recent-colors">
+        <span class="recent-label">Recent</span>
+        <div class="recent-swatches" id="recent-swatches"></div>
+      </section>
 
-    <!-- Hex input + color picker -->
-    <section class="color-input-row">
-      <div class="hex-input-wrapper">
-        <span class="hex-prefix">#</span>
-        <input
-          type="text"
-          id="hex-input"
-          class="hex-input"
-          placeholder="FFFFFF"
-          maxlength="6"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="false"
-        >
-        <button class="hex-apply-btn" id="hex-apply-btn" aria-label="Apply hex color">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 3L6 12L3 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+      <!-- Hex input + color picker -->
+      <section class="color-input-row">
+        <div class="hex-input-wrapper">
+          <span class="hex-prefix">#</span>
+          <input
+            type="text"
+            id="hex-input"
+            class="hex-input"
+            placeholder="FFFFFF"
+            maxlength="6"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+          <button class="hex-apply-btn" id="hex-apply-btn" aria-label="Apply hex color">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 3L6 12L3 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <button class="picker-btn" id="picker-btn" aria-label="Open color picker">
+          <input type="color" id="color-picker" class="color-picker-native" value="#2A2A2A">
         </button>
-      </div>
-      <button class="picker-btn" id="picker-btn" aria-label="Open color picker">
-        <input type="color" id="color-picker" class="color-picker-native" value="#2A2A2A">
+      </section>
+
+      <!-- FX Scenes -->
+      <div class="fx-divider"></div>
+      <section class="fx-scenes">
+        <button class="fx-btn" data-scene="police" id="fx-police">
+          <span class="fx-dot fx-dot-police"></span>
+          Police
+        </button>
+        <button class="fx-btn" data-scene="fire" id="fx-fire">
+          <span class="fx-dot fx-dot-fire"></span>
+          Fire
+        </button>
+        <button class="fx-btn" data-scene="storm" id="fx-storm">
+          <span class="fx-dot fx-dot-storm"></span>
+          Storm
+        </button>
+      </section>
+
+      <!-- Speed toggle (hidden when no scene active) -->
+      <section class="speed-toggle hidden" id="speed-toggle">
+        <button class="speed-btn" data-speed="0.5">Slow</button>
+        <button class="speed-btn active" data-speed="1">Medium</button>
+        <button class="speed-btn" data-speed="2">Fast</button>
+      </section>
+
+      <!-- Intensity slider -->
+      <section class="intensity-section">
+        <label class="intensity-label" for="intensity-slider">Intensity</label>
+        <input
+          type="range"
+          id="intensity-slider"
+          class="intensity-slider"
+          min="0"
+          max="100"
+          value="100"
+        >
+      </section>
+
+      <!-- Fullscreen button -->
+      <button class="fullscreen-btn" id="fullscreen-btn">
+        <svg class="fullscreen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 6V2H6M12 2H16V6M16 12V16H12M6 16H2V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Hide Controls
       </button>
-    </section>
 
-    <!-- FX Scenes -->
-    <div class="fx-divider"></div>
-    <section class="fx-scenes">
-      <button class="fx-btn" data-scene="police" id="fx-police">
-        <span class="fx-dot fx-dot-police"></span>
-        Police
-      </button>
-      <button class="fx-btn" data-scene="fire" id="fx-fire">
-        <span class="fx-dot fx-dot-fire"></span>
-        Fire
-      </button>
-      <button class="fx-btn" data-scene="storm" id="fx-storm">
-        <span class="fx-dot fx-dot-storm"></span>
-        Storm
-      </button>
-    </section>
+    </div>
 
-    <!-- Speed toggle (hidden when no scene active) -->
-    <section class="speed-toggle hidden" id="speed-toggle">
-      <button class="speed-btn" data-speed="0.5">Slow</button>
-      <button class="speed-btn active" data-speed="1">Medium</button>
-      <button class="speed-btn" data-speed="2">Fast</button>
-    </section>
-
-    <!-- Intensity slider -->
-    <section class="intensity-section">
-      <label class="intensity-label" for="intensity-slider">Intensity</label>
-      <input
-        type="range"
-        id="intensity-slider"
-        class="intensity-slider"
-        min="0"
-        max="100"
-        value="100"
-      >
-    </section>
-
-    <!-- Fullscreen button -->
-    <button class="fullscreen-btn" id="fullscreen-btn">
-      <svg class="fullscreen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 6V2H6M12 2H16V6M16 12V16H12M6 16H2V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Hide Controls
-    </button>
-
-  </div>
-
-  <!-- Info overlay -->
-  <div class="info-overlay" id="info-overlay">
-    <div class="info-card">
+    <!-- Info panel (shown on first visit, toggled via i button) -->
+    <div class="info-panel" id="info-panel">
       <h2>Light My Scene</h2>
       <p>Turn any screen into a photography light source. Pick a solid color, dial in a custom hex, or run animated lighting effects -- all from your browser.</p>
       <ul>
@@ -127,14 +127,18 @@
       </ul>
       <p>Built for photographers and content creators who need quick, free colored lighting on an iPad or any screen.</p>
       <div class="info-footer">
-        <a href="https://github.com/palhamel/light-my-scene" target="_blank" rel="noopener">View on GitHub</a> -- if you find it useful, a star is appreciated
+        <a href="https://github.com/palhamel/light-my-scene" target="_blank" rel="noopener noreferrer">View on GitHub</a> -- if you find it useful, a star is appreciated
       </div>
       <button class="info-close-btn" id="info-close-btn">Close</button>
     </div>
+
   </div>
 
+  <!-- Info button (bottom-right corner) -->
+  <button class="info-btn" id="info-btn" aria-label="About this app">i</button>
+
   <!-- Branding -->
-  <a class="branding" href="https://coderebel.se/" target="_blank" rel="noopener">{code rebel}</a>
+  <a class="branding" href="https://coderebel.se/" target="_blank" rel="noopener noreferrer">{code rebel}</a>
 
   <script src="app.js"></script>
 </body>
