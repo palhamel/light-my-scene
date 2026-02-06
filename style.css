@@ -470,11 +470,11 @@ body {
   z-index: 2;
   font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: white;
   text-decoration: none;
   user-select: none;
   pointer-events: auto;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  mix-blend-mode: difference;
   transition: opacity 0.2s ease;
 }
 
