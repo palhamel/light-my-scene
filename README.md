@@ -1,10 +1,9 @@
 # Light My Scene
 
-**Use it from here, so simple::** https://palhamel.github.io/light-my-scene/
-
 Turn any screen into a colored light source for photography. A fast, zero-dependency web app optimized for iPad and touch devices.
-
 Inspired by the Aputure MC portable light.
+
+**Use it from here, so simple::** https://palhamel.github.io/light-my-scene/
 
 ## Features
 
