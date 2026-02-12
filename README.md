@@ -1,6 +1,6 @@
 # Light My Scene
 
-**Live:** https://palhamel.github.io/light-my-scene/
+**Use it from here, so simple::** https://palhamel.github.io/light-my-scene/
 
 Turn any screen into a colored light source for photography. A fast, zero-dependency web app optimized for iPad and touch devices.
 
